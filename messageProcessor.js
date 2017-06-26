@@ -6,8 +6,7 @@
 const PirSensor = require('./pirSensor.js');
 
 function MessageProcessor(option) {
-    this.inited = true;
-  });
+  this.inited = true;
   this.sensor = new PirSensor(option.pirOption);
   this.deviceId = option.deviceId;
   this.inited = true;

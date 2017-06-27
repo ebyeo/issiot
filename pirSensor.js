@@ -6,7 +6,7 @@
 const Gpio = require('onoff').Gpio;
 
 function Sensor(options) {
-  this.pir = new Gpio(17, 'in', 'out');
+  this.pir = new Gpio(17, 'in', 'both');
 }
 
 Sensor.prototype.read = function (callback) {

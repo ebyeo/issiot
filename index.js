@@ -24,17 +24,19 @@ function sendMessage() {
   if (!sendingMessage) { return; }
   messageId++;
   messageProcessor.getMessage(messageId, (content, present) => {
-    var message = new Message(content);
-    message.properties.add('present', present ? 'true' : 'false');
-    console.log('Sending message: ' + content);
-    client.sendEvent(message, (err) => {
-      if (err) {
-        console.error('Failed to send message to Azure IoT Hub');
-      } else {
-        console.log('Message sent to Azure IoT Hub');
-      }
-      setTimeout(sendMessage, config.interval);
-    });
+	if (present) {
+		var message = new Message(content);
+		message.properties.add('present', present ? 'true' : 'false');
+		console.log('Sending message: ' + content);
+		client.sendEvent(message, (err) => {
+		  if (err) {
+			console.error('Failed to send message to Azure IoT Hub');
+		  } else {
+			console.log('Message sent to Azure IoT Hub');
+		  }
+		  setTimeout(sendMessage, config.interval);
+		});
+	}
   });
 }
 
